@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Love ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  text-align: center;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  overflow: hidden;
+}
+
+/* container */
+.container {
+  margin-top: 100px;
+}
+
+/* hidden */
+.hidden {
+  display: none;
+}
+
+/* input */
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+/* button */
+button {
+  padding: 10px 20px;
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* hearts */
+.heart {
+  position: absolute;
+  color: pink;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  0% {transform: translateY(100vh); opacity: 1;}
+  100% {transform: translateY(-10vh); opacity: 0;}
+}
+
+/* text animation */
+.fade {
+  animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+img {
+  width: 200px;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div class="container" id="login">
+  <h2>Enter Password 🔐</h2>
+  <input type="password" id="pass" placeholder="Enter code"
+    onkeypress="if(event.key==='Enter') check()">
+  <br><br>
+  <button onclick="check()">Unlock ❤️</button>
+  <p id="error" style="color:red;"></p>
+</div>
+
+<!-- CONTENT -->
+<div class="container hidden" id="content">
+  <h1 id="mainText"></h1>
+  <p id="subText"></p>
+  <img id="img" src="">
+</div>
+
+<!-- AUDIO -->
+<audio id="music" src="your-audio.mp3"></audio>
+
+<script>
+const correct = "queen of your heart";
+
+/* PASSWORD CHECK */
+function check() {
+  let input = document.getElementById("pass").value.trim().toLowerCase();
+
+  if(input === correct.toLowerCase()) {
+    document.getElementById("login").classList.add("hidden");
+    document.getElementById("content").classList.remove("hidden");
+
+    startFlow();
+    hearts();
+  } else {
+    document.getElementById("error").innerText = "Wrong Password 😜";
+  }
+}
+
+/* HEARTS */
+function hearts() {
+  setInterval(() => {
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💖";
+    h.style.left = Math.random()*100 + "vw";
+    h.style.fontSize = (10 + Math.random()*20) + "px";
+    document.body.appendChild(h);
+
+    setTimeout(()=>h.remove(),5000);
+  },300);
+}
+
+/* MAIN FLOW */
+function startFlow() {
+  const text = document.getElementById("mainText");
+  const sub = document.getElementById("subText");
+  const img = document.getElementById("img");
+  const music = document.getElementById("music");
+
+  /* STEP 1 */
+  text.innerText = "🎂 Happy Birthday My Love ❤️";
+  text.className = "fade";
+
+  setTimeout(() => {
+    sub.innerText = "I Love You Papa 💖";
+  }, 3000);
+
+  /* STEP 2 MUSIC START */
+  setTimeout(() => {
+    document.body.style.background = "pink";
+    music.play();
+  }, 5000);
+
+  /* LYRICS + IMAGES */
+  setTimeout(()=>{
+    text.innerText = "You are my everything ❤️";
+    img.src = "image1.jpg";
+  }, 8000);
+
+  setTimeout(()=>{
+    text.innerText = "Your smile makes my world shine ✨";
+    img.src = "image2.jpg";
+  }, 14000);
+
+  setTimeout(()=>{
+    text.innerText = "Every moment with you is special 💕";
+    img.src = "image3.jpg";
+  }, 20000);
+
+  /* FINAL MESSAGE */
+  setTimeout(()=>{
+    text.innerText = "Once again Happy Birthday My Love ❤️";
+    sub.innerText = "Smile always 😊 because your smile is like a Middlemist's Red Camellia 🌹";
+    img.style.display = "none";
+  }, 30000);
+}
+</script>
+
+</body>
+</html>
